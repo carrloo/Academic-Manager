@@ -1,4 +1,5 @@
 Academic Manager
+
 < Overview >
 
 The Academic App is a Java-based console application designed for educational institutions. 
