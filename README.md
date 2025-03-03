@@ -1,196 +1,101 @@
 Academic Manager
-Overview
+< Overview >
 
-The Academic App is a Java-based console application designed for educational institutions. It supports two types of users: students and teachers. Students can manage their course sections and view their grades, while teachers can assign grades and manage assignments.
+The Academic App is a Java-based console application designed for educational institutions. 
+It supports two types of users: students and teachers. 
+Students can manage their course sections and view their grades, while teachers can assign grades and manage assignments.
 
-This application features user authentication, role-specific functionalities, and interactive command-line menus. It is built using object-oriented programming (OOP) principles, with separate classes for users, courses, sections, grades, and assignments.
+This application features user authentication, role-specific functionalities, and interactive command-line menus. 
+It is built using object-oriented programming (OOP) principles, with separate classes for users, courses, sections, grades, and assignments.
 
-Features : 
+- Features : 
+> Student Features :
+  Enroll in Sections – Students can add themselves to available course sections.
+  Drop Sections – Students can remove themselves from a section they previously enrolled in.
+  View Grades – Students can check their grades for completed assignments or exams.
+  Student functionality remains unchanged from the original implementation.
 
-Student Features
+> Teacher Features :
+  Manage Student Grades
+  Add, edit, or delete student grades for specific courses and sections.
+  View a list of all assigned grades.
+  Manage Assignments
+  Create new assignments for students.
+  Edit assignment details or due dates.
+  Remove incorrect assignments.
 
-Enroll in Sections – Students can add themselves to available course sections.
+> General Features :
+  User Authentication – Users log in with a unique ID and password stored in a CSV file.
+  Interactive Console Menus – Step-by-step prompts allow users to navigate the app easily.
+  Data Persistence – User data and schedules are stored in external files for future access.
 
-Drop Sections – Students can remove themselves from a section they previously enrolled in.
-
-View Grades – Students can check their grades for completed assignments or exams.
-
-Student functionality remains unchanged from the original implementation.
-
-
-Teacher Features
-
-Manage Student Grades
-
-Add, edit, or delete student grades for specific courses and sections.
-
-View a list of all assigned grades.
-
-
-Manage Assignments
-
-Create new assignments for students.
-
-Edit assignment details or due dates.
-
-Remove outdated or incorrect assignments.
-
-
-Teacher functionality has been added separately without modifying student features.
-
-
-General Features
-
-User Authentication – Users log in with a unique ID and password stored in a CSV file.
-
-Interactive Console Menus – Step-by-step prompts allow users to navigate the app easily.
-
-Data Persistence – User data and schedules are stored in external files for future access.
-
-
-Setup and Installation
-
-Prerequisites
-
-Java Development Kit (JDK 8 or higher)
-
-A text editor or IDE (e.g., IntelliJ IDEA, Eclipse, VS Code)
-
-A terminal or command prompt to compile and run the program
-
-
-Project Files
-
+- Project Files :
 The application consists of the following Java files:
+> Main.java – The entry point of the application
+> User.java, Student.java, Teacher.java – Defines user roles
+> Course.java, Section.java – Manages course and section data
+> Grade.java, Assignment.java – Handles grading and assignments
+> Date.java – Provides date parsing and formatting
+> UserManager.java – Handles user authentication and data retrieval
 
-Main.java – The entry point of the application
+- Usage :
+> Logging In
+> Upon launching the application, users must enter their User ID and Password to log in.
+  These credentials are stored in a CSV file and verified during authentication.
+> Student Actions :
+  1. Manage Sections :
+     Add a section by entering the course name and section name.
+     Drop a section if no longer needed.
+     View a list of enrolled sections.
+  2. View Grades
+     Display all grades assigned to the student.
+     Teacher Actions
+> Teacher Actions :
+  1. Manage Student Grades :
+     Assign grades to students by selecting a course, section, and entering a grade value.
+     Modify existing grades.
+     Delete incorrect or outdated grades.
+     View a list of all student grades.
+  2. Manage Assignments :
+     Create new assignments for specific courses.
+     Edit or update assignment details and deadlines.
+     Remove completed or irrelevant assignments.
 
-User.java, Student.java, Teacher.java – Defines user roles
-
-Course.java, Section.java – Manages course and section data
-
-Grade.java, Assignment.java – Handles grading and assignments
-
-Date.java – Provides date parsing and formatting
-
-UserManager.java – Handles user authentication and data retrieval
-
-
-
-Usage
-
-Logging In
-
-Upon launching the application, users must enter their User ID and Password to log in. These credentials are stored in a CSV file and verified during authentication.
-
-Student Actions
-
-1. Manage Sections
-
-Add a section by entering the course name and section name.
-
-Drop a section if no longer needed.
-
-View a list of enrolled sections.
-
-
-
-2. View Grades
-
-Display all grades assigned to the student.
-
-
-
-
-Teacher Actions
-
-1. Manage Student Grades
-
-Assign grades to students by selecting a course, section, and entering a grade value.
-
-Modify existing grades.
-
-Delete incorrect or outdated grades.
-
-View a list of all student grades.
-
-
-
-2. Manage Assignments
-
-Create new assignments for specific courses.
-
-Edit or update assignment details and deadlines.
-
-Remove completed or irrelevant assignments.
-
-
-
-
-Code Structure
+- Code Structure :
 
 Main Application (Main.java)
 
-Handles:
+- Handles :
 
-User authentication – Checks login credentials.
+> User authentication – Checks login credentials.
 
-Role selection – Determines if the user is a student or teacher.
+> Role selection – Determines if the user is a student or teacher.
 
-Menu navigation – Provides interactive options based on user role.
-
-
-User and Role Classes
-
-User.java – Abstract base class for all users.
-
-Student.java – Extends User with student-specific functionalities (e.g., section enrollment).
-
-Teacher.java – Extends User with teacher-specific functionalities (e.g., grading, assignments).
+> Menu navigation – Provides interactive options based on user role.
 
 
-Data Management Classes
+- User and Role Classes :
 
-Course.java – Stores course details.
+> User.java – Abstract base class for all users.
 
-Section.java – Manages individual course sections.
+> Student.java – Extends User with student-specific functionalities (e.g., section enrollment).
 
-Grade.java – Represents a student’s performance in a course.
-
-Assignment.java – Stores assignment information.
-
-Date.java – Provides a simple date-handling utility.
-
-UserManager.java – Reads and verifies user credentials from a CSV file.
+> Teacher.java – Extends User with teacher-specific functionalities (e.g., grading, assignments).
 
 
-Future Enhancements
+- Data Management Classes :
 
-Graphical User Interface (GUI) – Convert the console-based interface into a JavaFX or Swing application.
+> Course.java – Stores course details.
 
-Database Integration – Replace CSV file storage with a MySQL or PostgreSQL database for scalability.
+> Section.java – Manages individual course sections.
 
-Enhanced Error Handling – Improve exception handling for invalid input cases.
+> Grade.java – Represents a student’s performance in a course.
 
-Automated Notifications – Notify students of new assignments and grade updates.
+> Assignment.java – Stores assignment information.
 
+> Date.java – Provides a simple date-handling utility.
 
-Contributing
-
-We welcome contributions! To contribute:
-
-1. Fork the repository
+> UserManager.java – Reads and verifies user credentials from a CSV file.
 
 
-2. Create a new branch for your feature (git checkout -b feature-name)
-
-
-3. Commit your changes (git commit -m "Added new feature")
-
-
-4. Push to your branch (git push origin feature-name)
-
-
-5. Submit a pull request
-
-This README provides clear instructions and details for users and developers. You can modify or expand it as needed for future updates."# Academic-Manager" 
+* This README provides clear instructions and details for users and developers. *
