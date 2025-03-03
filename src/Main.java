@@ -10,9 +10,9 @@ public class Main {
             new Course("MAT220")
         );
         List<Section> availableSections = Arrays.asList(
-            new Section("Section A", availableCourses.get(0)), 
-            new Section("Section B", availableCourses.get(0)), 
-            new Section("Section A", availableCourses.get(1)), 
+            new Section("Section A", availableCourses.get(0)),
+            new Section("Section B", availableCourses.get(0)),
+            new Section("Section A", availableCourses.get(1)),
             new Section("Section B", availableCourses.get(1)),
             new Section("Section A", availableCourses.get(2)),
             new Section("Section A", availableCourses.get(3))
@@ -20,7 +20,6 @@ public class Main {
 
         UserManager userManager = new UserManager();
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Welcome to the Academic App!");
 
         while (true) {
@@ -29,14 +28,12 @@ public class Main {
             String id = scanner.nextLine();
             System.out.print("Enter Password: ");
             String password = scanner.nextLine();
-
             User loggedInUser = userManager.authenticateUser(id, password);
 
             if (loggedInUser != null) {
-                System.out.println("Login successful! Welcome, " + loggedInUser.getFullName() 
-                        + " (" + loggedInUser.getRole() + ")");
+                System.out.println("Login successful! Welcome, " + loggedInUser.getFullName() +
+                                   " (" + loggedInUser.getRole() + ")");
                 boolean keepGoing = true;
-
                 while (keepGoing) {
                     System.out.println("\n── Main Menu ──");
                     System.out.println("1. Perform Role-Specific Action");
@@ -44,10 +41,9 @@ public class Main {
                     System.out.println("3. Logout");
                     System.out.println("4. Exit Application");
                     System.out.print("Choose an option: ");
-                    int choice = scanner.nextInt();
-                    scanner.nextLine();
+                    int choice = readInt(scanner);
 
-                    switch(choice) {
+                    switch (choice) {
                         case 1:
                             loggedInUser.roleSpecificAction();
                             if (loggedInUser instanceof Student) {
@@ -59,18 +55,16 @@ public class Main {
                                     System.out.println("2. View Grades");
                                     System.out.println("3. Back to Main Menu");
                                     System.out.print("Choose an option: ");
-                                    int studentChoice = scanner.nextInt();
-                                    scanner.nextLine();
-                                    switch(studentChoice) {
+                                    int studentChoice = readInt(scanner);
+                                    switch (studentChoice) {
                                         case 1:
                                             manageStudentSections(student, scanner, availableSections, availableCourses);
                                             break;
                                         case 2:
-                                            if (student.getGrades().isEmpty()) {
+                                            if (student.getGrades().isEmpty())
                                                 System.out.println("No Grades Available.");
-                                            } else {
+                                            else
                                                 student.viewGrades();
-                                            }
                                             break;
                                         case 3:
                                             System.out.println("Returning to Main Menu...");
@@ -80,8 +74,7 @@ public class Main {
                                             System.out.println("Invalid option! Please choose again.");
                                     }
                                 }
-                            }
-                            else if (loggedInUser instanceof Teacher) {
+                            } else if (loggedInUser instanceof Teacher) {
                                 Teacher teacher = (Teacher) loggedInUser;
                                 boolean manageTeacherOptions = true;
                                 while (manageTeacherOptions) {
@@ -92,26 +85,23 @@ public class Main {
                                     System.out.println("4. View Assigned Courses");
                                     System.out.println("5. Back to Main Menu");
                                     System.out.print("Choose an option: ");
-                                    int teacherChoice = scanner.nextInt();
-                                    scanner.nextLine();
-
+                                    int teacherChoice = readInt(scanner);
                                     switch (teacherChoice) {
                                         case 1:
                                             boolean manageGrades = true;
                                             while (manageGrades) {
-System.out.println("\n── Grade Management ──");
-System.out.println("1. Add Student Grade");
-System.out.println("2. Edit Student Grade");
-System.out.println("3. Delete Student Grade");
-System.out.println("4. View Student Grades");
-System.out.println("5. Back to Teacher Options");
-System.out.print("Choose an option: ");
-int gradeChoice = scanner.nextInt();
-scanner.nextLine();
-switch (gradeChoice) {
-case 1:
+                                                System.out.println("\n── Grade Management ──");
+                                                System.out.println("1. Add Student Grade");
+                                                System.out.println("2. Edit Student Grade");
+                                                System.out.println("3. Delete Student Grade");
+                                                System.out.println("4. View Student Grades");
+                                                System.out.println("5. Back to Teacher Options");
+                                                System.out.print("Choose an option: ");
+                                                int gradeChoice = readInt(scanner);
+                                                switch (gradeChoice) {
+                                                    case 1:
                                                         System.out.print("Enter Student ID: ");
-String studentId = scanner.nextLine();
+                                                        String studentId = scanner.nextLine();
                                                         Student targetStudent = getStudentById(studentId);
                                                         if (targetStudent == null) {
                                                             System.out.println("Student not found.");
@@ -120,7 +110,8 @@ String studentId = scanner.nextLine();
                                                         System.out.print("Enter Course Name: ");
                                                         String courseName = scanner.nextLine();
                                                         Course selectedCourse = null;
-                                                        for (Course course : availableCourses) {
+                                                        for (int i = 0; i < availableCourses.size(); i++) {
+                                                            Course course = availableCourses.get(i);
                                                             if (course.getCourseName().equalsIgnoreCase(courseName)) {
                                                                 selectedCourse = course;
                                                                 break;
@@ -133,9 +124,10 @@ String studentId = scanner.nextLine();
                                                         System.out.print("Enter Section Name: ");
                                                         String sectionName = scanner.nextLine();
                                                         Section selectedSection = null;
-                                                        for (Section section : availableSections) {
-                                                            if (section.getSectionName().equalsIgnoreCase(sectionName) 
-                                                                    && section.getCourse().equals(selectedCourse)) {
+                                                        for (int i = 0; i < availableSections.size(); i++) {
+                                                            Section section = availableSections.get(i);
+                                                            if (section.getSectionName().equalsIgnoreCase(sectionName) &&
+                                                                section.getCourse().equals(selectedCourse)) {
                                                                 selectedSection = section;
                                                                 break;
                                                             }
@@ -145,11 +137,16 @@ String studentId = scanner.nextLine();
                                                             break;
                                                         }
                                                         System.out.print("Enter Grade Value: ");
-                                                        double gradeValue = scanner.nextDouble();
-                                                        scanner.nextLine();
+                                                        double gradeValue;
+                                                        if (scanner.hasNextDouble()) {
+                                                            gradeValue = scanner.nextDouble();
+                                                            scanner.nextLine();
+                                                        } else {
+                                                            System.out.println("Invalid grade value.");
+                                                            scanner.nextLine();
+                                                            break;
+                                                        }
                                                         teacher.addStudentGrade(targetStudent, selectedSection, selectedCourse, gradeValue);
-                                                        Grade grade = new Grade(targetStudent, selectedSection, selectedCourse, gradeValue);
-                                                        targetStudent.getGrades().add(grade);
                                                         break;
                                                     case 2:
                                                         System.out.print("Enter Student ID for grade update: ");
@@ -162,7 +159,8 @@ String studentId = scanner.nextLine();
                                                         System.out.print("Enter Course Name: ");
                                                         String editCourseName = scanner.nextLine();
                                                         Course editCourse = null;
-                                                        for (Course course : availableCourses) {
+                                                        for (int i = 0; i < availableCourses.size(); i++) {
+                                                            Course course = availableCourses.get(i);
                                                             if (course.getCourseName().equalsIgnoreCase(editCourseName)) {
                                                                 editCourse = course;
                                                                 break;
@@ -173,8 +171,15 @@ String studentId = scanner.nextLine();
                                                             break;
                                                         }
                                                         System.out.print("Enter New Grade Value: ");
-                                                        double newGradeValue = scanner.nextDouble();
-                                                        scanner.nextLine();
+                                                        double newGradeValue;
+                                                        if (scanner.hasNextDouble()) {
+                                                            newGradeValue = scanner.nextDouble();
+                                                            scanner.nextLine();
+                                                        } else {
+                                                            System.out.println("Invalid grade value.");
+                                                            scanner.nextLine();
+                                                            break;
+                                                        }
                                                         teacher.editStudentGrade(editStudent, editCourse, newGradeValue);
                                                         break;
                                                     case 3:
@@ -188,7 +193,8 @@ String studentId = scanner.nextLine();
                                                         System.out.print("Enter Course Name: ");
                                                         String delCourseName = scanner.nextLine();
                                                         Course delCourse = null;
-                                                        for (Course course : availableCourses) {
+                                                        for (int i = 0; i < availableCourses.size(); i++) {
+                                                            Course course = availableCourses.get(i);
                                                             if (course.getCourseName().equalsIgnoreCase(delCourseName)) {
                                                                 delCourse = course;
                                                                 break;
@@ -221,14 +227,14 @@ String studentId = scanner.nextLine();
                                                 System.out.println("4. View Assignments");
                                                 System.out.println("5. Back to Teacher Options");
                                                 System.out.print("Choose an option: ");
-                                                int assignmentChoice = scanner.nextInt();
-                                                scanner.nextLine();
+                                                int assignmentChoice = readInt(scanner);
                                                 switch (assignmentChoice) {
                                                     case 1:
                                                         System.out.print("Enter Course Name: ");
                                                         String courseNameA = scanner.nextLine();
                                                         Course selectedCourseA = null;
-                                                        for (Course course : availableCourses) {
+                                                        for (int i = 0; i < availableCourses.size(); i++) {
+                                                            Course course = availableCourses.get(i);
                                                             if (course.getCourseName().equalsIgnoreCase(courseNameA)) {
                                                                 selectedCourseA = course;
                                                                 break;
@@ -241,9 +247,10 @@ String studentId = scanner.nextLine();
                                                         System.out.print("Enter Section Name: ");
                                                         String sectionNameA = scanner.nextLine();
                                                         Section selectedSectionA = null;
-                                                        for (Section section : availableSections) {
-                                                            if (section.getSectionName().equalsIgnoreCase(sectionNameA) 
-                                                                    && section.getCourse().equals(selectedCourseA)) {
+                                                        for (int i = 0; i < availableSections.size(); i++) {
+                                                            Section section = availableSections.get(i);
+                                                            if (section.getSectionName().equalsIgnoreCase(sectionNameA) &&
+                                                                section.getCourse().equals(selectedCourseA)) {
                                                                 selectedSectionA = section;
                                                                 break;
                                                             }
@@ -261,8 +268,7 @@ String studentId = scanner.nextLine();
                                                         break;
                                                     case 2:
                                                         System.out.print("Enter Assignment Index to Edit: ");
-                                                        int editIndex = scanner.nextInt();
-                                                        scanner.nextLine();
+                                                        int editIndex = readInt(scanner);
                                                         System.out.print("Enter New Assignment Details: ");
                                                         String newDetails = scanner.nextLine();
                                                         System.out.print("Enter New Due Date (DD/MM/YYYY): ");
@@ -272,8 +278,7 @@ String studentId = scanner.nextLine();
                                                         break;
                                                     case 3:
                                                         System.out.print("Enter Assignment Index to Delete: ");
-                                                        int delIndex = scanner.nextInt();
-                                                        scanner.nextLine();
+                                                        int delIndex = readInt(scanner);
                                                         teacher.deleteAssignment(delIndex - 1);
                                                         break;
                                                     case 4:
@@ -325,7 +330,42 @@ String studentId = scanner.nextLine();
         }
     }
 
-    // Helper method for managing student sections
+    private static int readInt(Scanner scanner) {
+        while (true) {
+            if (scanner.hasNextInt()) {
+                int num = scanner.nextInt();
+                scanner.nextLine();
+                return num;
+            } else {
+                System.out.print("Invalid input. Please enter a valid number: ");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    private static void viewSchedules() {
+        String filePath = "C:\\Users\\User\\OneDrive\\Documents\\USEK\\4th Semester\\GIN314\\AcademicApp";
+        System.out.println("\n── Schedule ──");
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath+"/schedule.csv"))) {
+            String line;
+            boolean firstLine = true;
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+                String[] parts = line.split(",");
+                if (parts.length >= 6) {
+                    System.out.println("Section: " + parts[0].trim() + " | Course: " + parts[1].trim() +
+                                       " | Type: " + parts[2].trim() + " | Date: " + parts[3].trim() +
+                                       " | Time: " + parts[4].trim() + " | Students: " + parts[5].trim());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading schedule file: " + e.getMessage());
+        }
+    }
+
     private static void manageStudentSections(Student student, Scanner scanner, List<Section> availableSections, List<Course> availableCourses) {
         boolean keepManaging = true;
         while (keepManaging) {
@@ -335,14 +375,14 @@ String studentId = scanner.nextLine();
             System.out.println("3. View My Sections");
             System.out.println("4. Back to Student Options");
             System.out.print("Choose an option: ");
-            int sectionChoice = scanner.nextInt();
-            scanner.nextLine();
+            int sectionChoice = readInt(scanner);
             switch (sectionChoice) {
                 case 1:
                     System.out.print("Enter Course Name: ");
                     String courseName = scanner.nextLine();
                     Course selectedCourse = null;
-                    for (Course course : availableCourses) {
+                    for (int i = 0; i < availableCourses.size(); i++) {
+                        Course course = availableCourses.get(i);
                         if (course.getCourseName().equalsIgnoreCase(courseName)) {
                             selectedCourse = course;
                             break;
@@ -355,36 +395,39 @@ String studentId = scanner.nextLine();
                     System.out.print("Enter Section Name: ");
                     String sectionName = scanner.nextLine();
                     Section selectedSection = null;
-                    for (Section section : availableSections) {
-                        if (section.getSectionName().equalsIgnoreCase(sectionName) 
-                                && section.getCourse().equals(selectedCourse)) {
+                    for (int i = 0; i < availableSections.size(); i++) {
+                        Section section = availableSections.get(i);
+                        if (section.getSectionName().equalsIgnoreCase(sectionName) &&
+                            section.getCourse().equals(selectedCourse)) {
                             selectedSection = section;
                             break;
                         }
                     }
-                    if (selectedSection == null) {
+                    if (selectedSection == null)
                         System.out.println("Section not available for this course.");
-                    } else {
+                    else
                         student.enrollInSection(selectedSection);
-                    }
                     break;
                 case 2:
                     System.out.print("Enter Section Name to Drop: ");
                     String dropSectionName = scanner.nextLine();
                     System.out.print("Enter Course Name to Drop: ");
                     String dropCourseName = scanner.nextLine();
-                    boolean found = false;
-                    for (Section section : student.getSections()) {
-                        if (section.getSectionName().equalsIgnoreCase(dropSectionName)
-                                && section.getCourse().getCourseName().equalsIgnoreCase(dropCourseName)) {
-                            student.dropSection(section);
-                            student.dropCourse(section.getCourse());
-                            found = true;
-                            System.out.println("Successfully dropped Section: " + dropSectionName + " for Course: " + dropCourseName);
+                    Section sectionToDrop = null;
+                    for (int i = 0; i < student.getSections().size(); i++) {
+                        Section section = student.getSections().get(i);
+                        if (section.getSectionName().equalsIgnoreCase(dropSectionName) &&
+                            section.getCourse().getCourseName().equalsIgnoreCase(dropCourseName)) {
+                            sectionToDrop = section;
                             break;
                         }
                     }
-                    if (!found) {
+                    if (sectionToDrop != null) {
+                        student.dropSection(sectionToDrop);
+                        student.dropCourse(sectionToDrop.getCourse());
+                        System.out.println("Successfully dropped Section: " + dropSectionName +
+                                           " for Course: " + dropCourseName);
+                    } else {
                         System.out.println("Section not found for the specified course.");
                     }
                     break;
@@ -401,40 +444,9 @@ String studentId = scanner.nextLine();
         }
     }
 
-    // Helper method to read and display schedules from the CSV file
-    private static void viewSchedules() {
-        String filePath = "C:\\Users\\First Tek\\Desktop\\Projects\\Test\\schedule.csv";
-        System.out.println("\n── Schedule ──");
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            boolean firstLine = true;
-            while ((line = br.readLine()) != null) {
-                if (firstLine) { 
-                    firstLine = false;
-                    continue;
-                }
-                String[] parts = line.split(",");
-                if (parts.length >= 6) {
-                    String section = parts[0].trim();
-                    String courseName = parts[1].trim();
-                    String type = parts[2].trim();
-                    String scheduledDate = parts[3].trim();
-                    String scheduledTime = parts[4].trim();
-                    String students = parts[5].trim();
-                    System.out.println("Section: " + section + " | Course: " + courseName 
-                        + " | Type: " + type + " | Date: " + scheduledDate 
-                        + " | Time: " + scheduledTime + " | Students: " + students);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading schedule file: " + e.getMessage());
-        }
-    }
-    
-    // Helper method to retrieve a Student object from the users CSV file using String ID
     private static Student getStudentById(String studentId) {
-        String filePath = "C:\\Users\\First Tek\\Desktop\\Projects\\Test\\users.csv";
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        String filePath = "C:\\Users\\User\\OneDrive\\Documents\\USEK\\4th Semester\\GIN314\\AcademicApp";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath+"/users.csv"))) {
             String line = br.readLine(); // Skip header
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
