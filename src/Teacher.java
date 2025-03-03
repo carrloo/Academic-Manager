@@ -49,12 +49,16 @@ public class Teacher extends User {
         System.out.println("No grade found for " + student.getFullName() + " in " + course.getCourseName());
     }
 
-    public void addAssignment(Section section, Course course, String assignmentDetails, Date dueDate) {
-        Assignment assignment = new Assignment(section, course, assignmentDetails, dueDate);
-        assignments.add(assignment);
-        System.out.println("Assignment added for " + course.getCourseName() + ": " + assignmentDetails + " (Due: " + dueDate + ")");
+    public void addAssignment(Section section, Course course, String assignmentDetails, Date dueDate, int newHour, int newMinute) {
+        if (!Schedule.isTestConflict(dueDate, newHour, newMinute)) {
+            Assignment assignment = new Assignment(section, course, assignmentDetails, dueDate, newHour, newMinute);
+            assignments.add(assignment);
+            System.out.println("Assignment added for " + course.getCourseName() + ": " + assignmentDetails +
+                    " (Due: " + dueDate + " at " + String.format("%02d:%02d", newHour, newMinute) + ")");
+        } else {
+            System.out.println("Time conflict! Another test is already scheduled at this time.");
+        }
     }
-
     public void editAssignment(int index, String newDetails, Date newDueDate) {
         if (index >= 0 && index < assignments.size()) {
             Assignment assignment = assignments.get(index);
@@ -68,7 +72,7 @@ public class Teacher extends User {
 
     public void deleteAssignment(int index) {
         if (index >= 0 && index < assignments.size()) {
-            System.out.println("Deleted assignment: " + assignments.get(index).getDetails());
+            System.out.println("Deleted assignment: " + assignments.get(index).getAssignmentDetails());
             assignments.remove(index);
         } else {
             System.out.println("Invalid assignment index.");
@@ -97,7 +101,7 @@ public class Teacher extends User {
         System.out.println("Assignments:");
         for (int i = 0; i < assignments.size(); i++) {
             Assignment assignment = assignments.get(i);
-            System.out.println((i + 1) + "assignments." + assignment.getCourse().getCourseName() + " | " + assignment.getDetails() + " (Due: " + assignment.getDueDate() + ")");
+            System.out.println((i + 1) + "assignments." + assignment.getCourse().getCourseName() + " | " + assignment.getAssignmentDetails() + " (Due: " + assignment.getDueDate() + ")");
         }
     }
 
