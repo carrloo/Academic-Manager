@@ -28,7 +28,6 @@ public class Student extends User {
         if (!sections.contains(section)) {
             sections.add(section);
             section.addStudent(this);
-            System.out.println(getFullName() + " enrolled in section: " + section.getSectionName());
         } else {
             System.out.println("Already enrolled in section: " + section.getSectionName());
         }
