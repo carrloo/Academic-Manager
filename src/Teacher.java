@@ -13,11 +13,16 @@ public class Teacher extends User {
         this.sections = new ArrayList<>();
         this.courses = new ArrayList<>();
     }
-
-    public void addStudentGrade(Student student,Section section, Course course, double gradeValue) {
+    public void addStudentGrade(Student student, Section section, Course course, double gradeValue) {
+        if (gradeValue < 0 || gradeValue > 100) {
+            System.out.println("Grade must be between 0 and 100.");
+            return;
+        }
         Grade grade = new Grade(student, section, course, gradeValue);
-        studentGrades.add(grade);
-        System.out.println("Grade " + gradeValue + " added for " + student.getFullName() + " in " + course.getCourseName());
+        studentGrades.add(grade);        
+        student.getGrades().add(grade);   
+        System.out.println("Grade " + gradeValue + " added for " 
+            + student.getFullName() + " in " + course.getCourseName());
     }
 
     public void editStudentGrade(Student student, Course course, double newGradeValue) {
