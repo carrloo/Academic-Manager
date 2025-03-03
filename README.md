@@ -42,6 +42,7 @@ The application consists of the following Java files:
 > Logging In
 > Upon launching the application, users must enter their User ID and Password to log in.
   These credentials are stored in a CSV file and verified during authentication.
+
 > Student Actions :
   1. Manage Sections :
      Add a section by entering the course name and section name.
