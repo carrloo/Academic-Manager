@@ -31,12 +31,19 @@ It is built using object-oriented programming (OOP) principles, with separate cl
   Data Persistence – User data and schedules are stored in external files for future access.
 
 - Project Files :
+  
 The application consists of the following Java files:
+
 ~ Main.java – The entry point of the application
+
 ~ User.java, Student.java, Teacher.java – Defines user roles
+
 ~ Course.java, Section.java – Manages course and section data
+
 ~ Grade.java, Assignment.java – Handles grading and assignments
+
 ~ Date.java – Provides date parsing and formatting
+
 ~ UserManager.java – Handles user authentication and data retrieval
 
 - Usage :
