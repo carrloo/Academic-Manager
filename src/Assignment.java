@@ -1,43 +1,27 @@
 public class Assignment {
-    private Course course;
     private Section section;
-    private String details;
+    private Course course;
+    private String assignmentDetails;
     private Date dueDate;
+    private int hour;
+    private int minute;
 
-    public Assignment(Section section, Course course, String details, Date dueDate) {
+    public Assignment(Section section, Course course, String assignmentDetails, Date dueDate, int hour, int minute) {
         this.section = section;
         this.course = course;
-        this.details = details;
+        this.assignmentDetails = assignmentDetails;
         this.dueDate = dueDate;
+        this.hour = hour;
+        this.minute = minute;
     }
 
-    public Section getSection() {
-        return section;
-    }
-    
-    public Course getCourse() { 
-        return course; 
-    }
-    public void setCourse(Course course){
-        this.course = course;
-     }
-    
-    public void setSection(Section section){
-        this.section = section;
-    }
-
-    public String getDetails() { 
-        return details;
-     }
-    public void setDetails(String details) {
-        this.details = details;
-     }
-
-    public Date getDueDate() { 
-        return dueDate; 
-    }
-
-    public void setDueDate(Date dueDate) { 
-        this.dueDate = dueDate;
-     }
+    public Section getSection() { return section; }
+    public Course getCourse() { return course; }
+    public String getAssignmentDetails() { return assignmentDetails; }
+    public void setDetails(String assignmentDetails) { this.assignmentDetails= assignmentDetails; }
+    public Date getDueDate() { return dueDate; }
+    public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
+    public int getHour() { return hour; }
+    public int getMinute() { return minute; }
 }
+
