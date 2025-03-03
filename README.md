@@ -47,6 +47,7 @@ The application consists of the following Java files:
 ~ UserManager.java – Handles user authentication and data retrieval
 
 - Usage :
+
 > Logging In
 > Upon launching the application, users must enter their User ID and Password to log in.
   These credentials are stored in a CSV file and verified during authentication.
