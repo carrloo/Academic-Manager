@@ -109,7 +109,7 @@ public class Student extends User {
         }
         for (int i = 0; i < assignments.size(); i++) {
             Assignment assignment = assignments.get(i);
-            System.out.println((i + 1) + "number of assignments." + assignment.getCourse().getCourseName() + " | " + assignment.getDetails() + " (Due: " + assignment.getDueDate() + ")");
+            System.out.println((i + 1) + "number of assignments." + assignment.getCourse().getCourseName() + " | " + assignment.getAssignmentDetails() + " (Due: " + assignment.getDueDate() + ")");
         }
     }
 
