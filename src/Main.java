@@ -3,20 +3,19 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        List<Course> availableCourses = Arrays.asList(
-            new Course("GIN314"),
-            new Course("GEL314"),
-            new Course("GERE200"),
-            new Course("MAT220")
-        );
-        List<Section> availableSections = Arrays.asList(
-            new Section("Section A", availableCourses.get(0)),
-            new Section("Section B", availableCourses.get(0)),
-            new Section("Section A", availableCourses.get(1)),
-            new Section("Section B", availableCourses.get(1)),
-            new Section("Section A", availableCourses.get(2)),
-            new Section("Section A", availableCourses.get(3))
-        );
+        List<Course> availableCourses = new ArrayList<>();
+        availableCourses.add(new Course("GIN314"));
+        availableCourses.add(new Course("GEL314"));
+        availableCourses.add(new Course("GERE200"));
+        availableCourses.add(new Course("MAT220"));
+        
+        List<Section> availableSections = new ArrayList<>();
+    availableSections.add(new Section("Section A", availableCourses.get(0)));
+    availableSections.add(new Section("Section B", availableCourses.get(0)));
+    availableSections.add(new Section("Section A", availableCourses.get(1)));
+    availableSections.add(new Section("Section B", availableCourses.get(1)));
+    availableSections.add(new Section("Section A", availableCourses.get(2)));
+    availableSections.add(new Section("Section A", availableCourses.get(3)));
 
         UserManager userManager = new UserManager();
         Scanner scanner = new Scanner(System.in);
@@ -264,7 +263,11 @@ public class Main {
                                                         System.out.print("Enter Due Date (DD/MM/YYYY): ");
                                                         String dueDateStr = scanner.nextLine();
                                                         Date dueDate = Date.parseDate(dueDateStr);
-                                                        teacher.addAssignment(selectedSectionA, selectedCourseA, assignmentDetails, dueDate);
+                                                        System.out.print("Enter Due Hour: ");
+                                                        int newHour = scanner.nextInt();
+                                                        System.out.print("Enter Due Minute: ");
+                                                        int newMinute = scanner.nextInt();
+                                                        teacher.addAssignment(selectedSectionA, selectedCourseA, assignmentDetails, dueDate, newHour, newMinute);
                                                         break;
                                                     case 2:
                                                         System.out.print("Enter Assignment Index to Edit: ");
