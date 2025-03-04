@@ -9,15 +9,15 @@ Students can manage their course sections and view their grades, while teachers 
 This application features user authentication, role-specific functionalities, and interactive command-line menus. 
 It is built using object-oriented programming (OOP) principles, with separate classes for users, courses, sections, grades, and assignments.
 
-- Features :
+> Features :
   
-> Student Features :
+- Student Features :
   Enroll in Sections – Students can add themselves to available course sections.
   Drop Sections – Students can remove themselves from a section they previously enrolled in.
   View Grades – Students can check their grades for completed assignments or exams.
   Student functionality remains unchanged from the original implementation.
 
-> Teacher Features :
+- Teacher Features :
   Manage Student Grades
   Add, edit, or delete student grades for specific courses and sections.
   View a list of all assigned grades.
@@ -26,12 +26,12 @@ It is built using object-oriented programming (OOP) principles, with separate cl
   Edit assignment details or due dates.
   Remove incorrect assignments.
 
-> General Features :
+- General Features :
   User Authentication – Users log in with a unique ID and password stored in a CSV file.
   Interactive Console Menus – Step-by-step prompts allow users to navigate the app easily.
   Data Persistence – User data and schedules are stored in external files for future access.
 
-- Project Files :
+> Project Files :
   
 The application consists of the following Java files:
 
