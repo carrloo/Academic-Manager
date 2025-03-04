@@ -12,10 +12,10 @@ It is built using object-oriented programming (OOP) principles, with separate cl
 > Features :
   
 - Student Features :
-  Enroll in Sections – Students can add themselves to available course sections.
-  Drop Sections – Students can remove themselves from a section they previously enrolled in.
-  View Grades – Students can check their grades for completed assignments or exams.
-  Student functionality remains unchanged from the original implementation.
+ . Enroll in Sections – Students can add themselves to available course sections.
+ . Drop Sections – Students can remove themselves from a section they previously enrolled in.
+ . View Grades – Students can check their grades for completed assignments or exams.
+ . Student functionality remains unchanged from the original implementation.
 
 - Teacher Features :
   Manage Student Grades
