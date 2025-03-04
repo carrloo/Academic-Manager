@@ -9,7 +9,8 @@ Students can manage their course sections and view their grades, while teachers 
 This application features user authentication, role-specific functionalities, and interactive command-line menus. 
 It is built using object-oriented programming (OOP) principles, with separate classes for users, courses, sections, grades, and assignments.
 
-- Features : 
+- Features :
+  
 > Student Features :
   Enroll in Sections – Students can add themselves to available course sections.
   Drop Sections – Students can remove themselves from a section they previously enrolled in.
