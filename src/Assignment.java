@@ -22,6 +22,8 @@ public class Assignment {
     public Date getDueDate() { return dueDate; }
     public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
     public int getHour() { return hour; }
+    public void setHour(int hour) { this.hour = hour; }
+    public void setMinute( int minute ){ this.minute = minute ;}
     public int getMinute() { return minute; }
 }
 
