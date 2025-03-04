@@ -75,6 +75,29 @@ public class Schedule {
         return false;
 
 }
+public static void viewSchedules() {
+    String filePath = "C:\\Users\\User\\OneDrive\\Documents\\USEK\\4th Semester\\GIN314\\AcademicApp";
+    System.out.println("\n── Schedule ──");
+    try (BufferedReader br = new BufferedReader(new FileReader(filePath+"/schedule.csv"))) {
+        String line;
+        boolean firstLine = true;
+        while ((line = br.readLine()) != null) {
+            if (firstLine) {
+                firstLine = false;
+                continue;
+            }
+            String[] parts = line.split(",");
+            if (parts.length >= 6) {
+                System.out.println("Section: " + parts[0].trim() + " | Course: " + parts[1].trim() +
+                                   " | Type: " + parts[2].trim() + " | Date: " + parts[3].trim() +
+                                   " | Time: " + parts[4].trim() + " | Students: " + parts[5].trim());
+            }
+        }
+    } catch (IOException e) {
+        System.out.println("Error reading schedule file: " + e.getMessage());
+    }
+}
+
 
     @Override
     public String toString() {
