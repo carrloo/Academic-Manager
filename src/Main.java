@@ -217,7 +217,6 @@ public class Main {
                                             }
                                             break;
                                             case 2:
-                                            // Assignment Management
                                             boolean manageAssignments = true;
                                             while (manageAssignments) {
                                                 System.out.println("\n── Assignment Management ──");
@@ -261,34 +260,17 @@ public class Main {
                                                         }
                                                         System.out.print("Enter Assignment Details: ");
                                                         String assignmentDetails = scanner.nextLine();
-                                                        
                                                         Date dueDate = null;
-
                                                         while (dueDate == null) {
+                                                            System.out.print("Enter Due Date (DD/MM/YYYY): ");
+                                                            String dueDateStr = scanner.nextLine();
                                                             try {
-                                                                System.out.print("Enter Due Day: ");
-                                                                int dueDay = scanner.nextInt();
-                                                                System.out.print("Enter Due Month: ");
-                                                                int dueMonth = scanner.nextInt();
-                                                                System.out.print("Enter Due Year: ");
-                                                                int dueYear = scanner.nextInt();
-                                                                scanner.nextLine();
-                                                                dueDate = new Date(dueDay, dueMonth, dueYear);
-                                                                dueDate.setDay(dueDay);
-                                                                dueDate.setMonth(dueMonth);
-                                                                dueDate.setYear(dueYear);
-                                                                if (dueDate.getDay() != dueDay || dueDate.getMonth() != dueMonth || dueDate.getYear() != dueYear) {
-                                                                    dueDate = null;
-                                                                }
-                                                        
-                                                            } catch (InputMismatchException e) {
-                                                                System.out.println("Invalid input! Please enter numbers only.");
-                                                                scanner.nextLine();
+                                                                dueDate = Date.parseDate(dueDateStr);
+                                                            } catch (IllegalArgumentException e) {
+                                                                System.out.println(e.getMessage());
                                                             }
                                                         }
-                                                        
-                                                        System.out.println("Due Date set to: " + dueDate);
-                                                        
+                                        
                                                         
                                                         int dueHour = 0, dueMinute = 0;
                                                         boolean validTime = false;
