@@ -59,12 +59,14 @@ public class Teacher extends User {
             System.out.println("Time conflict! Another test is already scheduled at this time.");
         }
     }
-    public void editAssignment(int index, String newDetails, Date newDueDate) {
+    public void editAssignment(int index, String newDetails, Date newDueDate,int newDueHour, int newDueMinute) {
         if (index >= 0 && index < assignments.size()) {
             Assignment assignment = assignments.get(index);
             assignment.setDetails(newDetails);
             assignment.setDueDate(newDueDate);
-            System.out.println("Assignment updated: " + newDetails + " (Due: " + newDueDate + ")");
+            assignment.setHour(newDueHour);
+            assignment.setMinute(newDueMinute);
+            System.out.println("Assignment updated: " + newDetails + " (Due Date: " + newDueDate +  " at " + String.format("%02d:%02d", newDueHour, newDueMinute) + ")");
         } else {
             System.out.println("Invalid assignment index.");
         }
