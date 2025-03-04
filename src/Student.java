@@ -118,4 +118,3 @@ public class Student extends User {
         System.out.println(getFullName() + " is accessing student materials.");
     }
 }
-
