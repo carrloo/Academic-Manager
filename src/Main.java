@@ -216,7 +216,8 @@ public class Main {
                                                 }
                                             }
                                             break;
-                                        case 2:
+                                            case 2:
+                                            // Assignment Management
                                             boolean manageAssignments = true;
                                             while (manageAssignments) {
                                                 System.out.println("\n── Assignment Management ──");
@@ -260,14 +261,58 @@ public class Main {
                                                         }
                                                         System.out.print("Enter Assignment Details: ");
                                                         String assignmentDetails = scanner.nextLine();
-                                                        System.out.print("Enter Due Date (DD/MM/YYYY): ");
-                                                        String dueDateStr = scanner.nextLine();
-                                                        Date dueDate = Date.parseDate(dueDateStr);
-                                                        System.out.print("Enter Due Hour: ");
-                                                        int newHour = scanner.nextInt();
-                                                        System.out.print("Enter Due Minute: ");
-                                                        int newMinute = scanner.nextInt();
-                                                        teacher.addAssignment(selectedSectionA, selectedCourseA, assignmentDetails, dueDate, newHour, newMinute);
+                                                        
+                                                        Date dueDate = null;
+
+                                                        while (dueDate == null) {
+                                                            try {
+                                                                System.out.print("Enter Due Day: ");
+                                                                int dueDay = scanner.nextInt();
+                                                                System.out.print("Enter Due Month: ");
+                                                                int dueMonth = scanner.nextInt();
+                                                                System.out.print("Enter Due Year: ");
+                                                                int dueYear = scanner.nextInt();
+                                                                scanner.nextLine();
+                                                                dueDate = new Date(dueDay, dueMonth, dueYear);
+                                                                dueDate.setDay(dueDay);
+                                                                dueDate.setMonth(dueMonth);
+                                                                dueDate.setYear(dueYear);
+                                                                if (dueDate.getDay() != dueDay || dueDate.getMonth() != dueMonth || dueDate.getYear() != dueYear) {
+                                                                    dueDate = null;
+                                                                }
+                                                        
+                                                            } catch (InputMismatchException e) {
+                                                                System.out.println("Invalid input! Please enter numbers only.");
+                                                                scanner.nextLine();
+                                                            }
+                                                        }
+                                                        
+                                                        System.out.println("Due Date set to: " + dueDate);
+                                                        
+                                                        
+                                                        int dueHour = 0, dueMinute = 0;
+                                                        boolean validTime = false;
+                                                        while (!validTime) {
+                                                            System.out.print("Enter Due Time (HH:MM): ");
+                                                            String timeInput = scanner.nextLine();
+                                                            String[] timeParts = timeInput.split(":");
+                                                            if (timeParts.length == 2) {
+                                                                try {
+                                                                    dueHour = Integer.parseInt(timeParts[0].trim());
+                                                                    dueMinute = Integer.parseInt(timeParts[1].trim());
+                                                                    if (dueHour < 0 || dueHour >= 24 || dueMinute < 0 || dueMinute >= 60) {
+                                                                        System.out.println("Invalid time values. Please enter time in HH:MM format (24-hour).");
+                                                                    } else {
+                                                                        validTime = true;
+                                                                    }
+                                                                } catch (NumberFormatException ex) {
+                                                                    System.out.println("Invalid numbers in time. Please use HH:MM format.");
+                                                                }
+                                                            } else {
+                                                                System.out.println("Invalid time format. Please use HH:MM format.");
+                                                            }
+                                                        }
+                                                        teacher.addAssignment(selectedSectionA, selectedCourseA, assignmentDetails, dueDate, dueHour, dueMinute);
                                                         break;
                                                     case 2:
                                                         System.out.print("Enter Assignment Index to Edit: ");
@@ -275,9 +320,38 @@ public class Main {
                                                         System.out.print("Enter New Assignment Details: ");
                                                         String newDetails = scanner.nextLine();
                                                         System.out.print("Enter New Due Date (DD/MM/YYYY): ");
-                                                        String newDueDateStr = scanner.nextLine();
-                                                        Date newDueDate = Date.parseDate(newDueDateStr);
-                                                        teacher.editAssignment(editIndex - 1, newDetails, newDueDate);
+                                                        Date newDueDate = null;
+                                                        while (newDueDate == null) {
+                                                            String newDueDateStr = scanner.nextLine();
+                                                            try {
+                                                                newDueDate = Date.parseDate(newDueDateStr);
+                                                            } catch (IllegalArgumentException e) {
+                                                                System.out.println(e.getMessage());
+                                                            }
+                                                        }
+                                                        System.out.print("Enter New Due Time (HH:MM): ");
+                                                        int newDueHour = 0, newDueMinute = 0;
+                                                        boolean validNewTime = false;
+                                                        while (!validNewTime) {
+                                                            String newTimeInput = scanner.nextLine();
+                                                            String[] newTimeParts = newTimeInput.split(":");
+                                                            if (newTimeParts.length == 2) {
+                                                                try {
+                                                                    newDueHour = Integer.parseInt(newTimeParts[0].trim());
+                                                                    newDueMinute = Integer.parseInt(newTimeParts[1].trim());
+                                                                    if (newDueHour < 0 || newDueHour >= 24 || newDueMinute < 0 || newDueMinute >= 60) {
+                                                                        System.out.println("Invalid time values. Please enter time in HH:MM format (24-hour).");
+                                                                    } else {
+                                                                        validNewTime = true;
+                                                                    }
+                                                                } catch (NumberFormatException ex) {
+                                                                    System.out.println("Invalid numbers in time. Please use HH:MM format.");
+                                                                }
+                                                            } else {
+                                                                System.out.println("Invalid time format. Please use HH:MM format.");
+                                                            }
+                                                        }
+                                                        teacher.editAssignment(editIndex - 1, newDetails, newDueDate,newDueHour, newDueMinute);
                                                         break;
                                                     case 3:
                                                         System.out.print("Enter Assignment Index to Delete: ");
@@ -312,7 +386,7 @@ public class Main {
                             }
                             break;
                         case 2:
-                            viewSchedules();
+                            Schedule.viewSchedules();
                             break;
                         case 3:
                             System.out.println("\nLogging out...");
@@ -343,29 +417,6 @@ public class Main {
                 System.out.print("Invalid input. Please enter a valid number: ");
                 scanner.nextLine();
             }
-        }
-    }
-
-    private static void viewSchedules() {
-        String filePath = "C:\\Users\\User\\OneDrive\\Documents\\USEK\\4th Semester\\GIN314\\AcademicApp";
-        System.out.println("\n── Schedule ──");
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath+"/schedule.csv"))) {
-            String line;
-            boolean firstLine = true;
-            while ((line = br.readLine()) != null) {
-                if (firstLine) {
-                    firstLine = false;
-                    continue;
-                }
-                String[] parts = line.split(",");
-                if (parts.length >= 6) {
-                    System.out.println("Section: " + parts[0].trim() + " | Course: " + parts[1].trim() +
-                                       " | Type: " + parts[2].trim() + " | Date: " + parts[3].trim() +
-                                       " | Time: " + parts[4].trim() + " | Students: " + parts[5].trim());
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading schedule file: " + e.getMessage());
         }
     }
 
@@ -450,7 +501,7 @@ public class Main {
     private static Student getStudentById(String studentId) {
         String filePath = "C:\\Users\\User\\OneDrive\\Documents\\USEK\\4th Semester\\GIN314\\AcademicApp";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath+"/users.csv"))) {
-            String line = br.readLine(); // Skip header
+            String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 4) {
